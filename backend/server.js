@@ -14,6 +14,7 @@ app.use("/api/clients", require("./src/routes/client.routes"));
 app.use("/api/leads", require("./src/routes/lead.routes"));
 app.use("/api/quotations", require("./src/routes/quotation.routes"));
 app.use("/api/invoices", require("./src/routes/invoice.routes"));
+app.use("/api/amcs", require("./src/routes/amc.routes"));
 
 
 app.use(errorHandler);
