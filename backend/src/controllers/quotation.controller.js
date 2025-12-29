@@ -1,8 +1,15 @@
 const Quotation = require("../models/Quotation.model");
 
+// Helper: quotation number generator
+const generateQuotationNumber = async () => {
+  const count = await Quotation.countDocuments();
+  return `QT-${String(count + 1).padStart(5, "0")}`;
+};
+
 // CREATE QUOTATION
 const createQuotation = async (req, res) => {
   try {
+    const quotationNumber = await generateQuotationNumber();
     const { items, gstPercent = 18 } = req.body;
 
     let subTotal = 0;
@@ -14,9 +21,9 @@ const createQuotation = async (req, res) => {
     const totalAmount = subTotal + gstAmount;
 
     const quotation = await Quotation.create({
+      quotationNumber,
       ...req.body,
       subTotal,
-      gstPercent,
       gstAmount,
       totalAmount,
       createdBy: req.user._id,
@@ -31,6 +38,8 @@ const createQuotation = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+module.exports = { createQuotation };
 
 // GET ALL QUOTATIONS
 const getAllQuotations = async (req, res) => {

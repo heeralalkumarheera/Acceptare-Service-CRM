@@ -4,6 +4,7 @@ const router = express.Router();
 const {
   createInvoiceFromQuotation,
   getAllInvoices,
+  getInvoicesByClient,
   updatePayment,
 } = require("../controllers/invoice.controller");
 
@@ -22,6 +23,13 @@ router.post(
 
 // GET ALL INVOICES
 router.get("/", protect, getAllInvoices);
+
+// GET CLIENT-WISE INVOICES (DAY 10)
+router.get(
+  "/client/:clientId",
+  protect,
+  getInvoicesByClient
+);
 
 // UPDATE PAYMENT
 router.put(
