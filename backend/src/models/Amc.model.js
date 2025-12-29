@@ -20,6 +20,10 @@ const amcSchema = new mongoose.Schema(
       enum: ["active", "expired"],
       default: "active",
     },
+    isRenewable: {
+      type: Boolean,
+      default: false,
+    },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

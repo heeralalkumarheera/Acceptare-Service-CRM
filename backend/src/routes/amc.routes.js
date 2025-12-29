@@ -4,7 +4,7 @@ const router = express.Router();
 const {
   createAmc,
   getAllAmcs,
-  updateAmcStatus,
+  renewAmc,
 } = require("../controllers/amc.controller");
 
 const {
@@ -12,18 +12,18 @@ const {
   authorizeRoles,
 } = require("../middlewares/auth.middleware");
 
-// CREATE AMC (admin, sales)
+// CREATE AMC
 router.post("/", protect, authorizeRoles("admin", "sales"), createAmc);
 
-// GET ALL AMCs
+// GET ALL AMCs (auto expiry logic runs here)
 router.get("/", protect, getAllAmcs);
 
-// UPDATE AMC STATUS (admin)
+// RENEW AMC
 router.put(
-  "/:id/status",
+  "/:id/renew",
   protect,
   authorizeRoles("admin"),
-  updateAmcStatus
+  renewAmc
 );
 
 module.exports = router;
