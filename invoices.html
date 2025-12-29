@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    padding: 20px;
+}
+
+.invoice-box {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+}
+
+.invoice-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.company-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+table th {
+    background: #e2e8f0;
+}
+
+.invoice-total {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+button {
+    padding: 8px 15px;
+    margin-left: 10px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+.dashboard {
+  display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 230px;
+  background: #0f172a;
+  color: white;
+  height: 100vh;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  margin-bottom: 30px;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li {
+  padding: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.sidebar li:hover,
+.sidebar .active {
+  background: #2563eb;
+}
+
+.logout {
+  background: #dc2626;
+}
+.active-status {
+  color: green;
+  font-weight: bold;
+}
+
+</style>
+
+</head>
+<body>
+   <div class="dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Client Panel</h2>
+    <ul>
+      <li class="active"><a href="index.html">dashboard</a></li>
+      <li class="active"><a href="project.html">My Projects</a></li>
+      <li class="active"><a href="invoices.html">invoices</a></li>
+      <li class="active"><a href="support.html">Support</a></li>
+      <li class="active"><a href="setting.html">Settings</a></li>
+      <li class="logout"><button>logout</button></li>
+    </ul>
+  </aside>
+
+<div class="invoice-box">
+
+    <div class="invoice-header">
+        <h2>INVOICE</h2>
+        <p>Invoice No: #INV-101</p>
+        <p>Date: 27 Dec 2025</p>
+    </div>
+
+    <div class="company-details">
+        <div>
+            <h4>From:</h4>
+            <form>
+                <label>name</label>
+                <input type="text" placeholder="name">
+                <br>
+                <label>email</label>
+                <input type="email" placeholder="email">
+                <br>
+                <label>phone number</label>
+                <input type="number" placeholder="phone number">
+            </form>
+            
+        </div>
+
+        <div>
+            <h4>To:</h4>
+              <form>
+                <label>name</label>
+                <input type="text" placeholder="name">
+                <br>
+                <label>email</label>
+                <input type="email" placeholder="email">
+                <br>
+                <label>address</label>
+                <input type="text" placeholder="address">
+            </form>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price (₹)</th>
+                <th>Qty</th>
+                <th>Total (₹)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Website Design</td>
+                <td class="price">5000</td>
+                <td class="qty">1</td>
+                <td class="total"></td>
+            </tr>
+            <tr>
+                <td>Dashboard UI</td>
+                <td class="price">3000</td>
+                <td class="qty">1</td>
+                <td class="total"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="invoice-total">
+        <h3>Grand Total: ₹ <span id="grandTotal">0</span></h3>
+    </div>
+
+    <div class="actions">
+        <button onclick="calculateInvoice()">Calculate</button>
+        <button onclick="window.print()">Print Invoice</button>
+        <button>submit</button>
+    </div>
+
+</div>
+
+<script>
+    function calculateInvoice() {
+    let prices = document.querySelectorAll(".price");
+    let qtys = document.querySelectorAll(".qty");
+    let totals = document.querySelectorAll(".total");
+
+    let grandTotal = 0;
+
+    prices.forEach((price, index) => {
+        let total = price.innerText * qtys[index].innerText;
+        totals[index].innerText = total;
+        grandTotal += total;
+    });
+
+    document.getElementById("grandTotal").innerText = grandTotal;
+}
+
+calculateInvoice();
+
+</script>
+</body>
+</html>

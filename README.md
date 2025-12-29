@@ -1,3 +1,6 @@
+# dashboard
+Start work on client dashboard UI and UX
+# with html css javascript
 # Acceptare-Service-CRM
 Day 1:
 - Created personal branch (heer-backend-day1)

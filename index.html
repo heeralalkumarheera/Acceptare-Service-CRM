@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Client Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div class="dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Client Panel</h2>
+    <ul>
+      <li class="active"><a href="index.html">dashboard</a></li>
+      <li class="active"><a href="project.html">My Projects</a></li>
+      <li class="active"><a href="invoices.html">invoices</a></li>
+      <li class="active"><a href="support.html">Support</a></li>
+      <li class="active"><a href="setting.html">Settings</a></li>
+      <li class="logout"><button>logout</button></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <h1>Welcome, Deepa 👋</h1>
+      <div class="profile">
+        <span>Client</span>
+      </div>
+    </header>
+
+    <!-- Stats Cards -->
+    <section class="cards">
+      <div class="card">
+        <p>Active Projects</p>
+        <h2>3</h2>
+      </div>
+      <div class="card">
+        <p>Total Payment</p>
+        <h2>₹75,000</h2>
+      </div>
+      <div class="card">
+        <p>Pending Tasks</p>
+        <h2>5</h2>
+      </div>
+    </section>
+
+    <!-- Project Table -->
+    <section class="table-section">
+      <h2>My Projects</h2>
+      <table>
+        <tr>
+          <th>Project</th>
+          <th>Status</th>
+          <th>Deadline</th>
+        </tr>
+        <tr>
+          <td>Website Design</td>
+          <td class="active-status">Active</td>
+          <td>30 Jan 2026</td>
+        </tr>
+        <tr>
+          <td>Dashboard UI</td>
+          <td class="pending-status">Pending</td>
+          <td>10 Feb 2026</td>
+        </tr>
+      </table>
+    </section>
+
+  </main>
+  <!-- Charts Section -->
+<section class="charts">
+
+  <div class="chart-card">
+    <h3>Project Progress</h3>
+    <canvas id="projectChart"></canvas>
+  </div>
+
+  <div class="chart-card">
+    <h3>Monthly Payments</h3>
+    <canvas id="paymentChart"></canvas>
+  </div>
+
+</section>
+
+
+</div>
+
+<script src="index.js"></script>
+</body>
+</html>
