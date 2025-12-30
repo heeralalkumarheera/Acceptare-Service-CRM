@@ -1,12 +1,9 @@
-import Button from "../components/Button";
-import Card from "../components/Card";
-
 const Dashboard = () => {
   return (
-    <Card>
+    <div style={{ padding: "2rem" }}>
       <h2>Dashboard</h2>
-      <Button label="Logout" />
-    </Card>
+      <p>Protected Dashboard Page</p>
+    </div>
   );
 };
 

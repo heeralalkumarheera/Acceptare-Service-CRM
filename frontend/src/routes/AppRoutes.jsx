@@ -1,3 +1,6 @@
+
+import React from "react";
+
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
@@ -16,20 +19,42 @@ const AppRoutes = () => (
     />
   </Routes>
 );
+
 import { Routes, Route } from "react-router-dom";
+
+import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
-import MainLayout from "../layouts/MainLayout";
+import LeadGroups from "../pages/LeadGroups";
 
-const AppRoutes = () => {
+import ProtectedRoute from "./ProtectedRoute";
+
+
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route element={<MainLayout />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Route>
+      {/* Public Routes */}
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+
+      {/* Protected Routes */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/dashboard/lead-groups"
+        element={
+          <ProtectedRoute>
+            <LeadGroups />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
-};
 
 export default AppRoutes;
