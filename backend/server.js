@@ -20,6 +20,7 @@ app.use("/api/amcs", require("./src/routes/amc.routes"));
 app.use("/api/followups", require("./src/routes/followup.routes"));
 app.use("/api/expenses", require("./src/routes/expense.routes"));
 app.use("/api/dashboard", require("./src/routes/dashboard.routes"));
+app.use("/api/automation-rules", require("./src/routes/automation.routes"));
 
 
 // Error handler
