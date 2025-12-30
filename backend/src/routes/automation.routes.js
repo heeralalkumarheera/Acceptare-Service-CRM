@@ -15,7 +15,7 @@ router.post("/", protect, authorizeRoles("admin"), createRule);
 // GET RULES
 router.get("/", protect, authorizeRoles("admin"), getAllRules);
 
-// RUN RULES (MANUAL – DAY 19)
+// MANUAL + CRON READY RUN (DAY 20)
 router.post("/run", protect, authorizeRoles("admin"), runRules);
 
 module.exports = router;

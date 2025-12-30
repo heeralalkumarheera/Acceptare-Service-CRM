@@ -30,7 +30,7 @@ const getAllRules = async (req, res) => {
   }
 };
 
-// 🔥 MANUAL RULE EXECUTION (PART 1)
+// 🔥 MANUAL + AUTO RULE EXECUTION (DAY 20 FINAL)
 const runRules = async (req, res) => {
   try {
     const rules = await AutomationRule.find({ isActive: true });
@@ -39,24 +39,31 @@ const runRules = async (req, res) => {
     let executed = [];
 
     for (let rule of rules) {
-      // LEAD INACTIVITY RULE
-      if (rule.module === "Lead") {
+      // 🔴 LEAD INACTIVITY → MARK AS COLD
+      if (rule.module === "Lead" && rule.action === "mark_cold") {
+        const thresholdDate = new Date(
+          today.getTime() - rule.thresholdDays * 24 * 60 * 60 * 1000
+        );
+
         const inactiveLeads = await Lead.find({
-          updatedAt: {
-            $lt: new Date(
-              today.getTime() - rule.thresholdDays * 24 * 60 * 60 * 1000
-            ),
-          },
+          updatedAt: { $lt: thresholdDate },
+          status: { $ne: "cold" },
         });
+
+        for (let lead of inactiveLeads) {
+          lead.status = "cold";
+          await lead.save();
+        }
 
         executed.push({
           rule: rule.name,
+          action: "mark_cold",
           affectedRecords: inactiveLeads.length,
         });
       }
 
-      // FOLLOW-UP OVERDUE RULE
-      if (rule.module === "FollowUp") {
+      // 🔴 FOLLOW-UP OVERDUE → ALERT READY
+      if (rule.module === "FollowUp" && rule.action === "alert_admin") {
         const overdueFollowUps = await FollowUp.find({
           status: "pending",
           nextFollowUpDate: { $lt: today },
@@ -64,6 +71,7 @@ const runRules = async (req, res) => {
 
         executed.push({
           rule: rule.name,
+          action: "alert_admin",
           affectedRecords: overdueFollowUps.length,
         });
       }
@@ -71,7 +79,7 @@ const runRules = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Automation rules evaluated",
+      message: "Automation rules executed successfully",
       data: executed,
     });
   } catch (error) {
