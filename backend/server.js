@@ -18,6 +18,7 @@ app.use("/api/quotations", require("./src/routes/quotation.routes"));
 app.use("/api/invoices", require("./src/routes/invoice.routes"));
 app.use("/api/amcs", require("./src/routes/amc.routes"));
 app.use("/api/followups", require("./src/routes/followup.routes"));
+app.use("/api/expenses", require("./src/routes/expense.routes"));
 
 
 // Error handler
