@@ -1,6 +1,7 @@
 const Client = require("../models/Client.model");
 const Quotation = require("../models/Quotation.model");
 const Invoice = require("../models/Invoice.model");
+const Amc = require("../models/Amc.model");
 
 // CLIENT PROFILE
 const getClientProfile = async (req, res) => {
@@ -25,7 +26,7 @@ const getClientQuotations = async (req, res) => {
   }
 };
 
-// CLIENT INVOICES
+// CLIENT INVOICES + PAYMENT STATUS
 const getClientInvoices = async (req, res) => {
   try {
     const invoices = await Invoice.find({
@@ -38,8 +39,22 @@ const getClientInvoices = async (req, res) => {
   }
 };
 
+// 🔥 CLIENT AMC VIEW
+const getClientAmcs = async (req, res) => {
+  try {
+    const amcs = await Amc.find({
+      client: req.client.id,
+    }).sort({ endDate: -1 });
+
+    res.status(200).json({ success: true, data: amcs });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 module.exports = {
   getClientProfile,
   getClientQuotations,
   getClientInvoices,
+  getClientAmcs,
 };
