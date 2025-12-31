@@ -21,22 +21,37 @@ const createClient = async (req, res) => {
   }
 };
 
-// GET ALL CLIENTS
+const paginate = require("../utils/pagination");
+
+// GET ALL CLIENTS (PAGINATED)
 const getAllClients = async (req, res) => {
   try {
-    const clients = await Client.find().sort({ createdAt: -1 });
+    const { page, limit, skip } = paginate(req);
+
+    const clients = await Client.find()
+      .skip(skip)
+      .limit(limit)
+      .sort({ createdAt: -1 })
+      .lean();
+    //for all clients total count
+    //const total = await Client.countDocuments();
+    //not count inactive or deleted clients
+    const total = await Client.countDocuments({ status: "active" });
 
     res.status(200).json({
       success: true,
       data: clients,
+      pagination: {
+        total,
+        page,
+        pages: Math.ceil(total / limit),
+      },
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
+
 
 // UPDATE CLIENT
 const updateClient = async (req, res) => {

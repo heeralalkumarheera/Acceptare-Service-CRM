@@ -3,9 +3,16 @@ const Quotation = require("../models/Quotation.model");
 
 // Helper: invoice number generator
 const generateInvoiceNumber = async () => {
-  const count = await Invoice.countDocuments();
-  return `INV-${String(count + 1).padStart(5, "0")}`;
+  const lastInvoice = await Invoice.findOne()
+    .sort({ createdAt: -1 })
+    .select("invoiceNumber");
+
+  if (!lastInvoice) return "INV-00001";
+
+  const lastNumber = parseInt(lastInvoice.invoiceNumber.split("-")[1]);
+  return `INV-${String(lastNumber + 1).padStart(5, "0")}`;
 };
+
 
 // CREATE INVOICE FROM QUOTATION (DAY 10 LOGIC)
 const createInvoiceFromQuotation = async (req, res) => {
@@ -58,25 +65,36 @@ const createInvoiceFromQuotation = async (req, res) => {
   }
 };
 
-// GET ALL INVOICES
+const paginate = require("../utils/pagination");
+
+// GET ALL INVOICES (PAGINATED)
 const getAllInvoices = async (req, res) => {
   try {
+    const { page, limit, skip } = paginate(req);
+
     const invoices = await Invoice.find()
       .populate("client", "companyName email")
-      .populate("quotation")
-      .sort({ createdAt: -1 });
+      .skip(skip)
+      .limit(limit)
+      .sort({ createdAt: -1 })
+      .lean();
+
+    const total = await Invoice.countDocuments();
 
     res.status(200).json({
       success: true,
       data: invoices,
+      pagination: {
+        total,
+        page,
+        pages: Math.ceil(total / limit),
+      },
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
+
 
 // CLIENT-WISE INVOICE LIST (DAY 10)
 const getInvoicesByClient = async (req, res) => {
