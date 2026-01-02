@@ -185,3 +185,20 @@ DAY 27 REPORT:
 ✔ Role-based authorization hardened
 ✔ Error responses masked for security
 ✔ Backend finalized with production-grade security
+
+DAY 28 REPORT:
+
+- Forked the organization repository for deployment due to permission constraints
+- Deployed backend from feature branch `heera-backend-2` on Render
+- Configured environment variables securely on Render
+- Connected MongoDB Atlas successfully
+- Generated live backend URL for UAT
+
+DAY 29 REPORT:
+
+- Completed full UAT on live deployed backend
+- Admin login, client creation, quotation, invoice, and payment flows tested
+- Dashboard APIs verified with live data
+- Follow-up and automation rules validated
+- No critical issues observed during UAT
+
