@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { validate, clientValidation } = require("../middlewares/validation.middleware");
 
 const {
   createClient,
@@ -18,6 +19,7 @@ router.post(
   "/",
   protect,
   authorizeRoles("admin", "sales"),
+  validate(clientValidation),
   createClient
 );
 
@@ -29,6 +31,7 @@ router.put(
   "/:id",
   protect,
   authorizeRoles("admin", "sales"),
+  validate(clientValidation),
   updateClient
 );
 

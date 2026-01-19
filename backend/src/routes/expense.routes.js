@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { validate, expenseValidation } = require("../middlewares/validation.middleware");
 
 const {
   createExpense,
@@ -12,7 +13,7 @@ const {
 const { protect } = require("../middlewares/auth.middleware");
 
 // CREATE EXPENSE
-router.post("/", protect, createExpense);
+router.post("/", protect, validate(expenseValidation), createExpense);
 
 // GET ALL EXPENSES
 router.get("/", protect, getAllExpenses);

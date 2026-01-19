@@ -1,7 +1,7 @@
 const Client = require("../models/Client.model");
 
 // CREATE CLIENT
-const createClient = async (req, res) => {
+const createClient = async (req, res, next) => {
   try {
     const client = await Client.create({
       ...req.body,
@@ -14,17 +14,14 @@ const createClient = async (req, res) => {
       data: client,
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    next(error);
   }
 };
 
 const paginate = require("../utils/pagination");
 
 // GET ALL CLIENTS (PAGINATED)
-const getAllClients = async (req, res) => {
+const getAllClients = async (req, res, next) => {
   try {
     const { page, limit, skip } = paginate(req);
 
@@ -33,8 +30,6 @@ const getAllClients = async (req, res) => {
       .limit(limit)
       .sort({ createdAt: -1 })
       .lean();
-    //for all clients total count
-    //const total = await Client.countDocuments();
     //not count inactive or deleted clients
     const total = await Client.countDocuments({ status: "active" });
 
@@ -48,13 +43,13 @@ const getAllClients = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    next(error);
   }
 };
 
 
 // UPDATE CLIENT
-const updateClient = async (req, res) => {
+const updateClient = async (req, res, next) => {
   try {
     const client = await Client.findByIdAndUpdate(
       req.params.id,
@@ -63,10 +58,7 @@ const updateClient = async (req, res) => {
     );
 
     if (!client) {
-      return res.status(404).json({
-        success: false,
-        message: "Client not found",
-      });
+      throw { statusCode: 404, message: "Client not found" };
     }
 
     res.status(200).json({
@@ -75,23 +67,17 @@ const updateClient = async (req, res) => {
       data: client,
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    next(error);
   }
 };
 
 // DELETE CLIENT
-const deleteClient = async (req, res) => {
+const deleteClient = async (req, res, next) => {
   try {
     const client = await Client.findByIdAndDelete(req.params.id);
 
     if (!client) {
-      return res.status(404).json({
-        success: false,
-        message: "Client not found",
-      });
+      throw { statusCode: 404, message: "Client not found" };
     }
 
     res.status(200).json({
@@ -99,10 +85,7 @@ const deleteClient = async (req, res) => {
       message: "Client deleted successfully",
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    next(error);
   }
 };
 
