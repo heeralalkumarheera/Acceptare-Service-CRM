@@ -1,0 +1,40 @@
+.tasks-page {
+  padding: 20px;
+}
+
+.tasks-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tasks-table th {
+  background: #f5f6fa;
+  padding: 12px;
+  text-align: left;
+}
+
+.tasks-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.status.pending {
+  background: #fff3cd;
+  color: #856404;
+  padding: 5px 10px;
+  border-radius: 12px;
+}
+
+.status.completed {
+  background: #e6f4ea;
+  color: #1e7e34;
+  padding: 5px 10px;
+  border-radius: 12px;
+}
+
+.status.in-progress {
+  background: #e8f0fe;
+  color: #1a73e8;
+  padding: 5px 10px;
+  border-radius: 12px;
+}

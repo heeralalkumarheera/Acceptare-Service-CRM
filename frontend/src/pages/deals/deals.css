@@ -1,0 +1,58 @@
+.deals-page {
+  padding: 20px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.deals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.deal-card {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.deal-card h3 {
+  margin: 0 0 6px;
+}
+
+.company {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.value {
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.status.open {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.status.inprogress {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status.closed {
+  background: #dcfce7;
+  color: #166534;
+}

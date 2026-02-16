@@ -1,22 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import App from "./app";
+import { AuthProvider } from "./context/AuthContext";
 import { BrowserRouter } from "react-router-dom";
-import AppRoutes from "./routes/AppRoutes";
+import "./styles/header.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <AppRoutes />
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );
-
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './app.jsx'
-import { BrowserRouter } from 'react-router-dom'
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-);
- origin/main

@@ -1,0 +1,17 @@
+td button {
+  margin-right: 6px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+td button:first-child {
+  background: #38bdf8;
+  color: white;
+}
+
+td button:last-child {
+  background: #ef4444;
+  color: white;
+}

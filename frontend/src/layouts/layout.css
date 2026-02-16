@@ -1,0 +1,110 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* LAYOUT */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  background: #0b1220;
+  color: #cbd5e1;
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* LOGO */
+.logo {
+  font-size: 18px;
+  font-weight: 600;
+  color: #22d3ee;
+  margin-bottom: 28px;
+  padding-left: 10px;
+}
+
+/* MENU */
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  margin-bottom: 6px;
+  color: #94a3b8;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.menu:hover {
+  background: rgba(34, 211, 238, 0.12);
+  color: #22d3ee;
+}
+
+/* ACTIVE */
+.menu.active {
+  background: rgba(34, 211, 238, 0.18);
+  color: #22d3ee;
+}
+
+/* CONTENT */
+.content {
+  flex: 1;
+  padding: 24px;
+  background: #ffffff;
+}
+
+/* SUB MENU */
+.submenu {
+  margin-left: 32px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.submenu-item {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #94a3b8;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-bottom: 4px;
+}
+
+.submenu-item:hover {
+  background: rgba(34, 211, 238, 0.12);
+  color: #22d3ee;
+}
+
+.submenu-item.active {
+  color: #22d3ee;
+  background: rgba(34, 211, 238, 0.18);
+}
+
+/* ARROW */
+.arrow {
+  margin-left: auto;
+  transition: transform 0.3s;
+}
+
+.arrow.rotate {
+  transform: rotate(180deg);
+}
+
+.menu {
+  transition: all 0.25s ease;
+}
+
+.menu:hover {
+  transform: translateX(4px);
+}
+
+table tr:hover {
+  background: #f1f5f9;
+  transition: 0.2s;
+}

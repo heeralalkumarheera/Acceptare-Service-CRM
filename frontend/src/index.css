@@ -1,0 +1,68 @@
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background-color: #0b1220;
+}
+
+a {
+  text-decoration: none;
+  color: #cbd5f5;
+}
+
+.link {
+  display: block;
+  padding: 10px 12px;
+  margin: 4px 0;
+  border-radius: 6px;
+}
+
+.link:hover {
+  background: #1e293b;
+  color: white;
+}
+
+.active {
+  background: #2563eb;
+  color: white;
+}
+
+.card {
+  background: #111827;
+  color: white;
+  padding: 20px;
+  border-radius: 14px;
+}
+
+.box {
+  background: #111827;
+  padding: 20px;
+  border-radius: 14px;
+}
+
+.card{
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background-color: #020617;
+  color: #e5e7eb;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #2563eb;
+  border-radius: 10px;
+}

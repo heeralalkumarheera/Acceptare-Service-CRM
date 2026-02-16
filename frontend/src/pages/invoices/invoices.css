@@ -1,0 +1,54 @@
+.invoice-page {
+  padding: 20px;
+}
+
+.create-btn {
+  background: #4f6bed;
+  color: #121212;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.invoice-cards {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.card {
+  padding: 15px;
+  border-radius: 10px;
+  color: #0a0a0a;
+  width: 200px;
+}
+
+.blue { background: #5d73d7; }
+.green { background: #4caf50; }
+.orange { background: #ff9800; }
+
+.invoice-list {
+  display: grid;
+  gap: 15px;
+}
+
+.invoice-item {
+  background: #4adb97;
+  padding: 15px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.status {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.status.unpaid { background: red; color: rgb(251, 248, 248); }
+.status.paid { background: green; color: white; }
+.status.partial { background: orange; color: white; }

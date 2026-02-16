@@ -1,3 +1,23 @@
+<<<<<<< HEAD
+body {
+  background: #0f172a;
+  color: #e5e7eb;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.sidebar {
+  background: #020617;
+  color: #38bdf8;
+}
+
+.card {
+  background: #020617;
+  border: 1px solid #1e293b;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+=======
 .login-container {
   max-width: 400px;
   margin: 80px auto;
@@ -42,3 +62,4 @@
 .login-btn:hover {
   background-color: #084298;
 }
+>>>>>>> eb35c3e (feat(frontend): fix routing, render dashboard, and configure gitignore)

@@ -1,0 +1,82 @@
+.header {
+  height: 60px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-left h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icon-btn {
+  position: relative;
+  background: #f3f4f6;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: red;
+  color: white;
+  font-size: 10px;
+  padding: 2px 5px;
+  border-radius: 50%;
+}
+
+.profile {
+  position: relative;
+}
+
+.profile img {
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 45px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  width: 150px;
+}
+
+.dropdown p {
+  padding: 10px;
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.dropdown p:hover {
+  background: #f3f4f6;
+}
+
+/* Dark Mode */
+body.dark {
+  background: #0f172a;
+}
+
+body.dark .header {
+  background: #020617;
+  color: white;
+}

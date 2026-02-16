@@ -1,0 +1,57 @@
+.calls-page {
+  padding: 20px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+}
+
+.calls-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calls-table th {
+  text-align: left;
+  padding: 12px;
+  background: #f5f6fa;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.calls-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status.completed {
+  background: #e6f4ea;
+  color: #1e7e34;
+}
+
+.status.missed {
+  background: #fdecea;
+  color: #c82333;
+}
+
+.status.scheduled {
+  background: #e8f0fe;
+  color: #1a73e8;
+}

@@ -1,0 +1,81 @@
+.settings-wrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.settings-sidebar {
+  width: 240px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.settings-sidebar a {
+  display: block;
+  padding: 12px;
+  margin-bottom: 6px;
+  color: #475569;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.settings-sidebar a.active {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.settings-content {
+  flex: 1;
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.card label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 500;
+}
+
+.card input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+}
+  
+.image-upload {
+  border: 1px dashed #cbd5e1;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 8px;
+  background: #f8fafc;
+}
+
+.image-upload img {
+  display: block;
+  max-height: 80px;
+  margin-bottom: 8px;
+}
+
+.image-upload.small img {
+  max-height: 50px;
+}
+
+.image-upload.banner img {
+  max-height: 120px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.save-btn {
+  margin-top: 20px;
+  padding: 10px 18px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}

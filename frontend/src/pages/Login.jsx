@@ -1,80 +1,109 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-
-//const Login = () => {
-  const { login } = useAuth();
-  const navigate = useNavigate();
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    login();
-    navigate("/dashboard");
-  };
-
-  return 
-    <form onSubmit={handleLogin}>
-      <button type="submit">Login</button>
-    </form>
-  import { useState } from "react";
-import Input from "../components/Input";
-import Button from "../components/Button";
-import { loginUser } from "../services/authServices";
- origin/main
+import { loginUser } from "../services/authService";
+import "../styles/global.css";
 
 const Login = () => {
-  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     console.log("Email:", email);
     console.log("Password:", password);
 
-    // Fake auth (for frontend testing)
     if (email === "admin@crm.com" && password === "123456") {
       localStorage.setItem("isAuthenticated", "true");
-      navigate("/dashboard/lead-groups"); // 👈 VERY IMPORTANT
+      login();
+      navigate("/dashboard/lead-groups");
     } else {
       alert("Invalid credentials");
     }
+  }
+} 
+import Input from "../components/Input";
+import Button from "../components/Button";
+
+
+const Logi = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError("");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!formData.email || !formData.password) {
+      setError("Email and password are required");
+      return;
+    }
+
+    loginUser(formData);
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
+    <div>
       <h2>Login</h2>
 
-      <form onSubmit={handleLogin}>
-        <div>
+      <form className="login-form" onSubmit={handleLogin}>
+        <div className="form-group">
           <label>Email</label>
-          <br />
           <input
             type="email"
+            placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
 
-        <div style={{ marginTop: "1rem" }}>
+        <div className="form-group">
           <label>Password</label>
-          <br />
           <input
             type="password"
+            placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
+        </form>
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
-        <button style={{ marginTop: "1rem" }} type="submit">
-          Login
-        </button>
+      <form onSubmit={handleSubmit}>
+        <Input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+
+        <Input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+
+        <Button type="submit" label="Login" />
       </form>
     </div>
   );
+
 };
 
- export default Login;
+export default Login;

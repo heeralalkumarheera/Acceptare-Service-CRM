@@ -1,3 +1,5 @@
+import React from "react";
+
 const Input = ({
   type = "text",
   name,
@@ -13,7 +15,10 @@ const Input = ({
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className={className}
+     
+      className={`input ${className}`}
+     
+
     />
   );
 };

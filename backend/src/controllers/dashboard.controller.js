@@ -14,9 +14,9 @@ const monthLabels = [
 // ===============================
 // 🔥 DASHBOARD SUMMARY (CARDS)
 // ===============================
-const getDashboardSummary = async (req, res) => {
+const getDashboardSummary = async (req, res, next) => {
   try {
-    const totalClients = await Client.countDocuments();
+    const totalClients = await Client.countDocuments({ status: "active" });
     const totalLeads = await Lead.countDocuments();
 
     const totalExpensesAgg = await Expense.aggregate([
@@ -24,6 +24,11 @@ const getDashboardSummary = async (req, res) => {
     ]);
 
     const totalInvoicesAgg = await Invoice.aggregate([
+      { $group: { _id: null, total: { $sum: "$totalAmount" } } },
+    ]);
+
+    const paidInvoicesAgg = await Invoice.aggregate([
+      { $match: { paymentStatus: "paid" } },
       { $group: { _id: null, total: { $sum: "$totalAmount" } } },
     ]);
 
@@ -39,19 +44,27 @@ const getDashboardSummary = async (req, res) => {
       nextFollowUpDate: { $lt: today },
     });
 
+    const leadsByStage = await Lead.aggregate([
+      { $group: { _id: "$stage", count: { $sum: 1 } } },
+    ]);
+
     res.status(200).json({
       success: true,
       data: {
-        totalClients,
-        totalLeads,
-        totalExpenses: totalExpensesAgg[0]?.total || 0,
-        totalInvoiceAmount: totalInvoicesAgg[0]?.total || 0,
-        pendingFollowUps,
-        overdueFollowUps,
+        summary: {
+          totalClients,
+          totalLeads,
+          totalExpenses: totalExpensesAgg[0]?.total || 0,
+          totalInvoiceAmount: totalInvoicesAgg[0]?.total || 0,
+          paidInvoiceAmount: paidInvoicesAgg[0]?.total || 0,
+          pendingFollowUps,
+          overdueFollowUps,
+        },
+        leadsByStage,
       },
     });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    next(error);
   }
 };
 
@@ -59,7 +72,7 @@ const getDashboardSummary = async (req, res) => {
 // ===============================
 // 🔥 MONTHLY SALES (INVOICE) TREND
 // ===============================
-const getMonthlySalesTrend = async (req, res) => {
+const getMonthlySalesTrend = async (req, res, next) => {
   try {
     const data = await Invoice.aggregate([
       {
@@ -78,7 +91,7 @@ const getMonthlySalesTrend = async (req, res) => {
 
     res.status(200).json({ success: true, data: result });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    next(error);
   }
 };
 
@@ -86,7 +99,7 @@ const getMonthlySalesTrend = async (req, res) => {
 // ===============================
 // 🔥 MONTHLY EXPENSE TREND
 // ===============================
-const getMonthlyExpenseTrend = async (req, res) => {
+const getMonthlyExpenseTrend = async (req, res, next) => {
   try {
     const data = await Expense.aggregate([
       {
@@ -105,7 +118,7 @@ const getMonthlyExpenseTrend = async (req, res) => {
 
     res.status(200).json({ success: true, data: result });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    next(error);
   }
 };
 
@@ -113,7 +126,7 @@ const getMonthlyExpenseTrend = async (req, res) => {
 // ===============================
 // 🔥 SALES VS EXPENSE (MONTHLY)
 // ===============================
-const getSalesVsExpense = async (req, res) => {
+const getSalesVsExpense = async (req, res, next) => {
   try {
     const sales = await Invoice.aggregate([
       {
@@ -145,7 +158,7 @@ const getSalesVsExpense = async (req, res) => {
 
     res.status(200).json({ success: true, data: result });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    next(error);
   }
 };
 

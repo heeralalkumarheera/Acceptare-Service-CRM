@@ -1,0 +1,18 @@
+.expenses-page {
+  padding: 20px;
+}
+
+.expenses-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.expenses-table th {
+  background: #f5f6fa;
+  padding: 12px;
+}
+
+.expenses-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}

@@ -1,7 +1,7 @@
 const Expense = require("../models/Expense.model");
 
 // CREATE EXPENSE
-const createExpense = async (req, res) => {
+const createExpense = async (req, res, next) => {
   try {
     const expense = await Expense.create({
       ...req.body,
@@ -14,7 +14,7 @@ const createExpense = async (req, res) => {
       data: expense,
     });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    next(error);
   }
 };
 
