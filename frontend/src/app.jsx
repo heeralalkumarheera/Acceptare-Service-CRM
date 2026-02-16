@@ -11,7 +11,7 @@ import Deals from "./pages/Deals";
 import Persons from "./pages/persons/Persons";
 import PersonDetail from "./pages/persons/PersonDetail";
 import Organizations from "./pages/Organizations";
-import LeadGroups from "./pages/groups/LeadGroups";
+import LeadGroups from "./pages/leadGroups/LeadGroups.jsx";
 
 import DealsPipeline from "./pages/deals/DealsPipeline";
 import OpenDeals from "./pages/deals/OpenDeals";
